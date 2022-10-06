@@ -1,39 +1,17 @@
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.jupiter.api.*;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Selenide;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
-import java.util.List;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
+import static java.awt.SystemColor.text;
 
 public class CardTest {
-    private WebDriver driver;
-
-    @BeforeAll
-    static void setUpClass() {
-        WebDriverManager.chromedriver().setup();
-    }
-
-    @BeforeEach
-    void setupTest() {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("--no-sandbox");
-        options.addArguments("--headless");
-        driver = new ChromeDriver(options);
-        driver.get("http://localhost:9999/");
-    }
-
-    @AfterEach
-    void teardown() {
-        driver.quit();
-    }
-
+    
     @Test
     void shouldTestFullPositiveForm() {
-        driver.get("http://localhost:9999");
+        Selenide.open("http://localhost:9999");
         List<WebElement> inputs = driver.findElements(By.tagName("input"));
         inputs.get(0).sendKeys("Смирнова Екатерина Петровна");
         inputs.get(1).sendKeys("+79758868855");
