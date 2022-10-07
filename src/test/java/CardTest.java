@@ -12,13 +12,11 @@ public class CardTest {
     @Test
     void shouldTestFullPositiveForm() {
         Selenide.open("http://localhost:9999");
-        List<WebElement> inputs = driver.findElements(By.tagName("input"));
-        inputs.get(0).sendKeys("Смирнова Екатерина Петровна");
-        inputs.get(1).sendKeys("+79758868855");
-        driver.findElement(By.className("checkbox__box")).click();
-        driver.findElement(By.className("button")).click();
-        String expected = "Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.";
-        String actual = driver.findElement(By.className("paragraph_theme_alfa-on-white")).getText().trim();
-        Assertions.assertEquals(expected, actual);
+       $("[data-test-id=name] input").setValue("Смирнова Екатерина");
+        $("[data-test-id=phone] input").setValue("+79758868855");
+        $("[data-test-id=agreement]").click();
+        $("[type=button]").click();
+        String expected = "  Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.";
+        String actual =  $("[data-test-id=order-success]").getText();
     }
 }
