@@ -12,7 +12,7 @@ public class CardTest {
     @Test
     void shouldTestFullPositiveForm() {
         Selenide.open("http://localhost:9999");
-        $("[data-test-id=name] input").setValue("Смирнова-Никифорова Екатерина");
+        $("[data-test-id=name] input").setValue("Смирнова Екатерина");
         $("[data-test-id=phone] input").setValue("+79758868855");
         $("[data-test-id=agreement]").click();
         $("[type=button]").click();
