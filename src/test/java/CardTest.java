@@ -8,15 +8,15 @@ import static com.codeborne.selenide.Selenide.$$;
 import static java.awt.SystemColor.text;
 
 public class CardTest {
-    
+
     @Test
     void shouldTestFullPositiveForm() {
         Selenide.open("http://localhost:9999");
-       $("[data-test-id=name] input").setValue("Смирнова Екатерина");
+        $("[data-test-id=name] input").setValue("Смирнова-Никифорова Екатерина");
         $("[data-test-id=phone] input").setValue("+79758868855");
         $("[data-test-id=agreement]").click();
         $("[type=button]").click();
-        String expected = "  Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.";
-        String actual =  $("[data-test-id=order-success]").getText();
+        $("[data-test-id=order-success]").shouldHave(text(" Ваша заявка успешно отправлена!" +
+                " Наш менеджер свяжется с вами в ближайшее время."));
     }
 }
